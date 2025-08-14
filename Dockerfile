@@ -11,16 +11,8 @@ RUN apt-get update && \
 RUN curl https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2025.05.1-513-amd64.deb > rstudio.deb && \
     dpkg -i rstudio.deb
 # install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh
-# Add SQL Server ODBC Driver 18 for Ubuntu 24.04
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
-RUN curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list > /etc/apt/sources.list.d/mssql-release.list
-RUN apt-get update
-RUN ACCEPT_EULA=Y apt-get install -y msodbcsql18
-RUN ACCEPT_EULA=Y apt-get install -y mssql-tools18
-RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
-RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
-RUN R -e "install.packages(c('odbc', 'sparklyr'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN curl -fsSL https://code-server.dev/install.sh | sh --version=4.103.0
+
 USER jovyan
 RUN pip install --no-cache-dir git+https://github.com/jupyterhub/jupyter-rsession-proxy@5113f4572583bc2ba56aae951d02ec68e1a23841
 RUN pip install --no-cache-dir git+https://github.com/betatim/vscode-binder@92789f55fb978c7be82ac3c5ea9989248b47353d
