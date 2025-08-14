@@ -11,7 +11,7 @@ RUN apt-get update && \
 RUN curl https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2025.05.1-513-amd64.deb > rstudio.deb && \
     dpkg -i rstudio.deb
 # install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh --version=4.103.0
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 USER jovyan
 RUN pip install --no-cache-dir git+https://github.com/jupyterhub/jupyter-rsession-proxy@5113f4572583bc2ba56aae951d02ec68e1a23841
