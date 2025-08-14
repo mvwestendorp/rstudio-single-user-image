@@ -92,6 +92,7 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+          scanners: 'vuln'
           output: trivy-report.sarif
           version: latest
       - name: Upload Trivy scan results to GitHub Security tab
