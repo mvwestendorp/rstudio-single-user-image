@@ -96,6 +96,8 @@ jobs:
           scanners: 'vuln'
           output: trivy-report.sarif
           version: latest
+          skip-dirs: '/usr/lib/code-server/lib/vscode/extensions/'
+          skip-files: '/usr/lib/code-server/lib/vscode/package.json'
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
