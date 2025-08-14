@@ -9,6 +9,8 @@ RUN apt-get update && \
     apt-get install psmisc libapparmor1 lsb-release libclang-dev libpq5 postgresql-client libpq-dev unixodbc-dev gnupg2 krb5-user default-jdk -y && \
 RUN curl https://download2.rstudio.org/server/focal/amd64/rstudio-server-2025.05.1-513-amd64.deb > rstudio.deb && \
     dpkg -i rstudio.deb
+# install code-server
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
 RUN curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list > /etc/apt/sources.list.d/mssql-release.list
 RUN apt-get update
@@ -20,5 +22,5 @@ RUN R -e "install.packages(c('odbc', 'sparklyr'), dependencies=TRUE, repos='http
 COPY krb5.conf /etc/krb5.conf
 COPY hosts /etc/hosts
 USER jovyan
-RUN pip install --no-cache-dir git+https://github.com/jupyterhub/jupyter-rsession-proxy@d1f04108fc7aa689e34aa9d93192f2ed6a997faa
+RUN pip install --no-cache-dir git+https://github.com/betatim/vscode-binder@92789f55fb978c7be82ac3c5ea9989248b47353d
 # RUN rstudio-server start
