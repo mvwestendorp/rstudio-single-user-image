@@ -8,6 +8,7 @@ RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1
     dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 RUN apt-get update && \
     apt-get install psmisc libapparmor1 lsb-release libclang-dev libpq5 postgresql-client libpq-dev unixodbc-dev gnupg2 krb5-user default-jdk -y && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 # install RStudio
 RUN curl https://download2.rstudio.org/server/focal/amd64/rstudio-server-2025.05.1-513-amd64.deb > rstudio.deb && \
     dpkg -i rstudio.deb
