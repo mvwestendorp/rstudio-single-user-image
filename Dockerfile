@@ -19,8 +19,6 @@ RUN ACCEPT_EULA=Y apt-get install -y mssql-tools18
 RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
 RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 RUN R -e "install.packages(c('odbc', 'sparklyr'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
-COPY krb5.conf /etc/krb5.conf
-COPY hosts /etc/hosts
 USER jovyan
 RUN pip install --no-cache-dir git+https://github.com/betatim/vscode-binder@92789f55fb978c7be82ac3c5ea9989248b47353d
 # RUN rstudio-server start
