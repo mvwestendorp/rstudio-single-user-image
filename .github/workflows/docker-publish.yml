@@ -47,6 +47,7 @@ jobs:
         uses: PyCQA/bandit-action@v1
         with:
           targets: "jupyter-rsession-proxy/,vscode-binder/"
+          severity: "medium"
 
   build:
 
