@@ -1,11 +1,15 @@
 # JupyterHub single user image
-# Includes RStudio Server, mssql odbc necessities
+# Includes RStudio Server, odbc necessities
 FROM quay.io/jupyter/datascience-notebook:hub-5.3.0
 
 USER root
 
 RUN apt-get update && \
-    apt-get install psmisc libapparmor1 lsb-release libclang-dev libpq5 postgresql-client libpq-dev unixodbc-dev gnupg2 krb5-user default-jdk -y && \
+    apt-get install -y --no-install-recommends \
+        psmisc \
+        libssl-dev \
+        lsb-release \
+        libclang-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 # install RStudio
 RUN curl https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2025.05.1-513-amd64.deb > rstudio.deb && \
